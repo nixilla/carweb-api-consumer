@@ -4,7 +4,6 @@ namespace Carweb\Converter;
 
 class DefaultConverter implements ConverterInterface
 {
-
     /**
      * Converts string result from API call to something usable
      *
@@ -13,6 +12,9 @@ class DefaultConverter implements ConverterInterface
      */
     public function convert($string)
     {
-        return $string;
+        if(class_exists('LSS\XML2Array'))
+            return LSS\XML2Array::createArray($string);
+        else
+            return $string;
     }
 }
