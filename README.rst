@@ -18,3 +18,17 @@ Via composer:
             "nixilla/carweb-api-consumer": "*"
         }
     }
+
+Tests
+-----
+
+This is copy/paste command
+
+.. code:: sh
+
+    git clone https://github.com/nixilla/carweb-api-consumer.git && \
+    cd carweb-api-consumer && \
+    mkdir bin && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=bin && \
+    ./bin/composer.phar install --dev && \
+    ./bin/phpunit
