@@ -8,6 +8,8 @@ use Carweb\Cache\CacheInterface;
 use Carweb\Converter\ConverterInterface;
 use Carweb\Converter\DefaultConverter;
 use Carweb\Exception\ApiException;
+use Carweb\Exception\ValidationException;
+use Carweb\Validator\VRM;
 
 class Consumer
 {
@@ -90,6 +92,11 @@ class Consumer
     public function findByVRM($vrm, $strClientRef = 'default client', $strClientDescription = 'Carweb PHP Library')
     {
         $vrm = strtoupper(preg_replace('/\s+/', '', $vrm));
+
+        $validator = new VRM();
+        if( ! $validator->isValid($vrm))
+            throw new ValidationException('Invalid UK VRM');
+
         $api_method = 'strB2BGetVehicleByVRM';
 
         $cache_key = sprintf('%s.%s', $api_method, $vrm);

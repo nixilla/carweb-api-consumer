@@ -65,6 +65,19 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * @expectedException \Carweb\Exception\ValidationException
+     */
+    public function testFindByVRMInvalidVRM()
+    {
+        $client = $this->getClient();
+
+        $consumer = new Consumer($client, 'username', 'password', 'key');
+
+        $consumer->findByVRM('AA00 AAA', 'test', 'test');
+
+    }
+
     public function testFindByVRMWithCacheFalse()
     {
         $client = $this->getClient();
