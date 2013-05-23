@@ -221,7 +221,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException \Carweb\Exception\ApiException
      */
     public function testCallWithServerError()
     {

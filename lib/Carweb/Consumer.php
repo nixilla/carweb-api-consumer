@@ -218,7 +218,7 @@ class Consumer
      */
     protected function handleException(Response $response)
     {
-        throw new \Exception($response->getContent(), $response->getStatusCode());
+        throw new ApiException($response->getContent(), $response->getStatusCode());
     }
 
     protected function hasErrors($xml_string)
