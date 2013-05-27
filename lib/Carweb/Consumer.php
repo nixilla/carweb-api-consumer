@@ -59,6 +59,11 @@ class Consumer
     private $cache;
 
     /**
+     * @var bool
+     */
+    private $validate = true;
+
+    /**
      * @var array
      */
     protected $converters = array();
@@ -72,13 +77,14 @@ class Consumer
      * @param $strKey1
      * @param null|\Carweb\Cache\CacheInterface $cache
      */
-    public function __construct($client, $strUserName, $strPassword, $strKey1, CacheInterface $cache = null)
+    public function __construct($client, $strUserName, $strPassword, $strKey1, CacheInterface $cache = null, $validate = true)
     {
         $this->client = $client;
         $this->strUserName = $strUserName;
         $this->strPassword = $strPassword;
         $this->strKey1 = $strKey1;
         $this->cache = $cache;
+        $this->validate = $validate;
     }
 
     /**
@@ -94,7 +100,7 @@ class Consumer
         $vrm = strtoupper(preg_replace('/\s+/', '', $vrm));
 
         $validator = new VRM();
-        if( ! $validator->isValid($vrm))
+        if( ! $validator->isValid($vrm) && $this->validate)
             throw new ValidationException('Invalid UK VRM');
 
         $api_method = 'strB2BGetVehicleByVRM';
